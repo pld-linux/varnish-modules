@@ -63,7 +63,10 @@ rm -rf $RPM_BUILD_ROOT
 	INSTALL="install -p" \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm $RPM_BUILD_ROOT%{_libdir}/varnish/vmods/*.la
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
+
+chmod a+rx $RPM_BUILD_ROOT%{_libdir}/varnish/vmods/*.so
 
 install -d $RPM_BUILD_ROOT%{_mandir}/man3
 cp -p docs/*.3 $RPM_BUILD_ROOT%{_mandir}/man3
@@ -74,5 +77,21 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc docs AUTHORS CHANGES.rst COPYING LICENSE README.rst
-%{_libdir}/varnish/vmods/*
-%{_mandir}/man3/*.3*
+%attr(755,root,root) %{_libdir}/varnish/vmods/libvmod_bodyaccess.so
+%attr(755,root,root) %{_libdir}/varnish/vmods/libvmod_cookie.so
+%attr(755,root,root) %{_libdir}/varnish/vmods/libvmod_header.so
+%attr(755,root,root) %{_libdir}/varnish/vmods/libvmod_saintmode.so
+%attr(755,root,root) %{_libdir}/varnish/vmods/libvmod_softpurge.so
+%attr(755,root,root) %{_libdir}/varnish/vmods/libvmod_tcp.so
+%attr(755,root,root) %{_libdir}/varnish/vmods/libvmod_var.so
+%attr(755,root,root) %{_libdir}/varnish/vmods/libvmod_vsthrottle.so
+%attr(755,root,root) %{_libdir}/varnish/vmods/libvmod_xkey.so
+%{_mandir}/man3/vmod_bodyaccess.3*
+%{_mandir}/man3/vmod_cookie.3*
+%{_mandir}/man3/vmod_header.3*
+%{_mandir}/man3/vmod_saintmode.3*
+%{_mandir}/man3/vmod_softpurge.3*
+%{_mandir}/man3/vmod_tcp.3*
+%{_mandir}/man3/vmod_var.3*
+%{_mandir}/man3/vmod_vsthrottle.3*
+%{_mandir}/man3/vmod_xkey.3*
